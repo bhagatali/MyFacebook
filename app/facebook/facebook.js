@@ -14,7 +14,7 @@ angular.module('myApp.facebook', ['ngRoute','ngFacebook'])
   $facebookProvider.setPermissions("email", "public_profile", "user_posts", "publish_actions", "use_photos");
 })
 
-.run(function($rootscope){
+.run(function($rootScope){
     (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];
          if (d.getElementById(id)) {return;}
@@ -24,6 +24,12 @@ angular.module('myApp.facebook', ['ngRoute','ngFacebook'])
        }(document, 'script', 'facebook-jssdk'));    
 })
 
-.controller('FacebookCtrl', [function() {
+.controller('FacebookCtrl', ['$scope','$facebook',function($scope,$facebook) {
+    $scope.isLoggedIn = false;
+    $scope.login = function(){
+        $facebook.login().then(function(){
+           console.log('LOGGED IN'); 
+        });
+    }
 
 }]);
